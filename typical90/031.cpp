@@ -17,38 +17,36 @@ int main() {
   for (int i = 0; i < N; i++) {
     cin >> B[i];
   }
-  vector<vector<int>> dp(1000, vector<int>(3000, -1));
-  auto dfs = [&](auto& dfs, int w, int b) -> int {
-    if (dp[w][b] != -1) {
-      return dp[w][b];
+  vector<vector<int>> mem(51, vector<int>(3000, -1));
+  auto get = [&](auto& self, int w, int b) -> int {
+    if (mem[w][b] != -1) {
+      return mem[w][b];
     }
     if (w == 0 && b < 2) {
-      return dp[w][b] = 0;
+      return mem[w][b] = 0;
     }
-    int ans = 0;
+    set<int> mex;
     if (w >= 1) {
-      if (!dfs(dfs, w - 1, b + w)) {
-        ans = 1;
-      }
+      mex.insert(self(self, w - 1, b + w));
     }
     if (b >= 2) {
-      for (int k = 1; k <= b / 2; k++) {
-        if (!dfs(dfs, w, b - k)) {
-          ans = 1;
-        }
+      for (int i = 1; i <= b / 2; i++) {
+        mex.insert(self(self, w, b - i));
       }
     }
-    return dp[w][b] = ans;
+    for (int v = 0; true; v++) {
+      if (mex.count(v) == 0) {
+        return mem[w][b] = v;
+      }
+    }
   };
-  int cnt = 0;
+  int grundy = 0;
   for (int i = 0; i < N; i++) {
-    cnt += dfs(dfs, W[i], B[i]);
-    cnt %= 2;
-    cout << dfs(dfs, W[i], B[i]) << " \n"[i == N - 1];
+    grundy ^= get(get, W[i], B[i]);
   }
-  if (cnt) {
-    cout << "First" << endl;
-  } else {
+  if (grundy == 0) {
     cout << "Second" << endl;
+  } else {
+    cout << "First" << endl;
   }
 }
