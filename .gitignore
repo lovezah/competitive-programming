@@ -1,6 +1,6 @@
-.DS_Store
-in
-out
-a.cpp
-b.cpp
-a.out
+**/.DS_Store
+**/in
+**/out
+**/a.out
+
+/a.cpp
