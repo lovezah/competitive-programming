@@ -45,6 +45,5 @@ template <class T, class U> bool ckmax(T &a, const U b) { return b > a ? a = b, 
 int main() {
   cin.tie(nullptr)->ios_base::sync_with_stdio(false);
   cout << setprecision(20);
-
   ${0}
 }
