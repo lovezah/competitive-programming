@@ -23,4 +23,4 @@ string to_debug(T x, string s)
   [&]<size_t... I>(index_sequence<I...>) { ((s += ", " + to_debug(get<I>(x))), ...); }(make_index_sequence<size>());
   return "(" + s.substr(s.empty() ? 0 : 2) + ")";
 }
-#define debug(...) cerr << __LINE__ << ": (" #__VA_ARGS__ ") = " << to_debug(tuple(__VA_ARGS__)) << "\n"
+#define dbg(...) cerr << __LINE__ << ": (" #__VA_ARGS__ ") = " << to_debug(tuple(__VA_ARGS__)) << "\n"
