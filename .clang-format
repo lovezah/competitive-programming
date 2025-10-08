@@ -2,3 +2,5 @@ BasedOnStyle: LLVM
 IndentWidth: 2
 ColumnLimit: 160
 AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: true
